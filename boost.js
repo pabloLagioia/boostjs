@@ -118,15 +118,3 @@
 	});
 
 })();
-
-
-/*TESTING*/
-
-function A() {}
-function B() {}; B.prototype.culo = function() {return 10};
-
-A.inherits(B)
-
-var a = new A();
-
-console.debug(a.culo());

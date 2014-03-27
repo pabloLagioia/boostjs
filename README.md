@@ -10,16 +10,69 @@ None of this methods modifies the native objects in a way that it can affect fun
 
 ## Strings
 
-	- contains
-	- replaceAll
+### contains
+Determines whether a string contains another string or not
+```js
+var myStr = "Hello!";
+assert.equal(myStr.contains("l"), true);
+```
+
+### replaceAll
+Replaces all ocurrences of a given string in another string
+```js
+var myStr = "Hello World!";
+assert.equal(myStr.replaceAll("o", "0"), "Hell0 W0rld!");
+```
 
 ## Arrays
 
-	- remove
-	- contains
+### remove
+Removes an element from an array and returns the removed element.
+
+```js
+var myArr = ["bannanas", "apples", "oranges"]
+myArr.remove("apples");
+assert.equal(myArray.indexOf("apples"), -1);
+```
+### contains
+Determines whether an array contains an object or not
+
+```js
+var myArr = ["bannanas", "apples", "oranges"]
+assert.equal(myArray.contains("apples"), true);
+```
 
 ## Objects
 
-	- clone
-	- toJson
-	- inherit
+### clone
+Returns a clone of the object
+
+```js
+var obj = { myProperty: "some string" };
+obj.clone();
+```
+
+### toJson
+Short hand for JSON.stringify(object);
+
+```js
+var obj = { myProperty: "some string" };
+obj.toJson();
+```
+
+### inherits
+
+```js
+function Parent() {}
+Parent.prototype.doSomething = function() {
+	return "I'm doing something now";
+};
+function Child() {}
+
+Child.inherits(Parent);
+
+var child = new Child();
+
+child.doSomething();
+```
+

@@ -52,7 +52,7 @@
 	
 	boost(Function.prototype,
 		function (superCtor) {
-			exted(this, superCtor);
+			extend(this, superCtor);
 		},
 		"inherits");
 
@@ -62,6 +62,7 @@
 			return JSON.stringify(this);
 		},
 		"toJson");
+
 	boost(Object.prototype,
 		function () {
 			return JSON.parse(JSON.stringify(this));

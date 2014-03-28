@@ -98,7 +98,7 @@
 		},
 		"remove");
 
-	boost (Array.prototype,
+	boost(Array.prototype,
 		function () {
 			return this.slice();
 		},

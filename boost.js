@@ -37,7 +37,7 @@
 		});
 	};
 
-	function boost (proto, fun, name) {
+	function boost(proto, fun, name) {
 		if (!proto.hasOwnProperty(name)) {
 			Object.defineProperty(proto, name, {
 				writable: true,

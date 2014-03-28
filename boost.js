@@ -49,7 +49,6 @@
 	}
 	
 	/*Boost Function*/
-	
 	boost(Function.prototype,
 		function (superCtor) {
 			extend(this, superCtor);
@@ -82,9 +81,8 @@
 			return this.replace(r, replaceWith);
 		},
 		"replaceAll");
-		
-	/*Boost Arrays*/
 
+	/*Boost Arrays*/
 	boost(Array.prototype,
 		function (value) {
 			return this.indexOf(value) != -1;

@@ -37,84 +37,70 @@
 		});
 	};
 
-	/*Boost Function*/
-	Object.defineProperty(Function.prototype, "inherits", {
-		writable: false,
-		enumerable: false,
-		configurable: false,
-		value: function(superCtor) {
-			extend(this, superCtor);
+	function boost (proto, fun, name) {
+		if (!proto.hasOwnProperty(name)) {
+			Object.defineProperty(proto, name, {
+				writable: true,
+				enumerable: false,
+				configurable: false,
+				value: fun
+			})
 		}
-	});
+	}
+	
+	/*Boost Function*/
+	boost(Function.prototype,
+		function (superCtor) {
+			extend(this, superCtor);
+		},
+		"inherits");
 
 	/*Boost Object*/
-
-	Object.defineProperty(Object.prototype, "toJson", {
-		writable: false,
-		enumerable: false,
-		configurable: false,
-		value: function() {
+	boost(Object.prototype,
+		function () {
 			return JSON.stringify(this);
-		}
-	});
-	Object.defineProperty(Object.prototype, "clone", {
-		writable: false,
-		enumerable: false,
-		configurable: false,
-		value: function() {
+		},
+		"toJson");
+
+	boost(Object.prototype,
+		function () {
 			return JSON.parse(JSON.stringify(this));
-		}
-	});
+		},
+		"clone");
 
 	/*Boost Strings*/
-
-	Object.defineProperty(String.prototype, "contains", {
-		writable: false,
-		enumerable: false,
-		configurable: false,
-		value: function(anotherString) {
+	boost(String.prototype,
+		function (anotherString) {
 			return this.indexOf(anotherString) != -1;
-		}
-	});
-	Object.defineProperty(String.prototype, "replaceAll", {
-		writable: false,
-		enumerable: false,
-		configurable: false,
-		value: function(lookFor, replaceWith) {
+		},
+		"contains");
+
+	boost(String.prototype,
+		function (lookFor, replaceWith) {
 			var r = new RegExp(lookFor, "g");
 			return this.replace(r, replaceWith);
-		}
-	});
-	
+		},
+		"replaceAll");
+
 	/*Boost Arrays*/
-
-	Object.defineProperty(Array.prototype, "contains", {
-		writable: false,
-		enumerable: false,
-		configurable: false,
-		value: function(value) {
+	boost(Array.prototype,
+		function (value) {
 			return this.indexOf(value) != -1;
-		}
-	});
-	Object.defineProperty(Array.prototype, "remove", {
-		writable: false,
-		enumerable: false,
-		configurable: false,
-		value: function(value) {
-			var index = this.indexOf(value);
-			if ( index > -1 ) {
-				return this.splice(index, 1)
-			}
-			return this;
-		}
-	});
-	Object.defineProperty(Array.prototype, "clone", {
-		writable: false,
-		enumerable: false,
-		configurable: false,
-		value: function() {
-			return this.slice();
-		}
-	});
+		},
+		"contains");
 
+	boost(Array.prototype,
+		function (value) {
+			var index = this.indexOf(value);
+			if (index > -1) {
+				return this.splice(index, 1);
+			}
+		},
+		"remove");
+
+	boost(Array.prototype,
+		function () {
+			return this.slice();
+		},
+		"clone");
 })();
